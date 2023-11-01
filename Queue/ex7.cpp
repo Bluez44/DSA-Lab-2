@@ -6,23 +6,20 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int sumOfMaxSubarray(std::vector<int>& nums, int k) {
-    int sum = 0;
-    int maxVal = 0;
-    int n = nums.size();
-    if(n < k) return -1;
-    
-    for (int i = 0; i < n - k + 1; i++) {
-        maxVal = nums[i];
+int sumOfMaxSubarray(vector<int>& nums,int k) {
+    deque<int> dq;
+    long long sum = 0;
+    for (int i = 0 ; i < (int) nums.size(); i++){
+        while(!dq.empty() && nums[dq.back()] <= nums[i])
+            dq.pop_back();
         
-        for (int j = i + 1; j < i + k; j++) {
-            if (nums[j] > maxVal) {
-                maxVal = nums[j];
-            }
-        }
+        while(!dq.empty() && dq.front() <= i-k)
+            dq.pop_front();
         
-        sum += maxVal;
+        dq.push_back(i);
+        
+        if (i >= k-1) sum+=nums[dq.front()];
+        
     }
-    
     return sum;
 }
