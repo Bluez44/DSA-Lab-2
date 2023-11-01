@@ -23,3 +23,10 @@ int sumOfMaxSubarray(vector<int>& nums,int k) {
     }
     return sum;
 }
+
+int main() {
+    vector<int> nums {1, 2, 4, 3, 6};
+    int k = 3;
+    cout << sumOfMaxSubarray(nums, k);
+    return 0;
+}
